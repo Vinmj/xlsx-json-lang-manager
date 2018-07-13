@@ -1,11 +1,19 @@
 xlsxj = require("./index");
   xlsxj({
-    input: "sample/sample.xlsx", 
-    outputdir: "sample"
+    sourceInfo:[{
+      input: "sample/languages.csv",
+      objectLevel: 3
+    },{
+      input: "sample/errorCode.csv",
+      objectLevel: 2
+    }],
+    outputdir: "sample",
+    numberOfLanguages: 4,
+    allowDuplicateValues: true
   }, function(err, result) {
     if(err) {
       console.error(err);
     }else {
-      console.log("Success");
+      //console.log("Resource JSON files created successfully.");
     }
   });

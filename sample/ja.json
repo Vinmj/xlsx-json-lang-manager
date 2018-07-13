@@ -1,0 +1,32 @@
+{
+	"Shell": {
+		"Login": {
+			"Login": "JP-Login",
+			"RememberMe": "JP-Remember me",
+			"Forgot": "JP-Forgot",
+			"Email": "JP-Email",
+			"Username": "JP-Username",
+			"Password": "JP-Password",
+			"Upload": "JP-Upload",
+			"Back": "JP-Back",
+			"Update": "JP-Update"
+		},
+		"UserWidget": {
+			"ProfileSettings": "JP-Profile settings",
+			"Logout": "JP-Logout"
+		}
+	},
+	"main": {
+		"ErrorCode1": "JP-Error-Description-1",
+		"ErrorCode2": "JP-Error-Description-2",
+		"ErrorCode3": "JP-Error-Description-3",
+		"ErrorCode4": "JP-Error-Description-4",
+		"ErrorCode5": "JP-Error-Description-5",
+		"ErrorCode6": "JP-Error-Description-6",
+		"ErrorCode7": "JP-Error-Description-7",
+		"ErrorCode8": "JP-Error-Description-8",
+		"ErrorCode9": "JP-Error-Description-9",
+		"ErrorCode10": "JP-Error-Description-10",
+		"ErrorCode11": "JP-Error-Description-11"
+	}
+}

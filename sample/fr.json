@@ -1,0 +1,32 @@
+{
+	"Shell": {
+		"Login": {
+			"Login": "FR-Login",
+			"RememberMe": "FR-Remember me",
+			"Forgot": "FR-Forgot",
+			"Email": "FR-Email",
+			"Username": "FR-Username",
+			"Password": "FR-Password",
+			"Upload": "FR-Upload",
+			"Back": "FR-Back",
+			"Update": "FR-Update"
+		},
+		"UserWidget": {
+			"ProfileSettings": "FR-Profile settings",
+			"Logout": "FR-Logout"
+		}
+	},
+	"main": {
+		"ErrorCode1": "FR-Error-Description-1",
+		"ErrorCode2": "FR-Error-Description-2",
+		"ErrorCode3": "FR-Error-Description-3",
+		"ErrorCode4": "FR-Error-Description-4",
+		"ErrorCode5": "FR-Error-Description-5",
+		"ErrorCode6": "FR-Error-Description-6",
+		"ErrorCode7": "FR-Error-Description-7",
+		"ErrorCode8": "FR-Error-Description-8",
+		"ErrorCode9": "FR-Error-Description-9",
+		"ErrorCode10": "FR-Error-Description-10",
+		"ErrorCode11": "FR-Error-Description-11"
+	}
+}

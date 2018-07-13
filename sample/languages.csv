@@ -1,0 +1,12 @@
+Obj-module,Obj-Entity,Obj-Name,en,mne,fr,ja
+Shell,Login,Login,Login,mPrijaviti se,FR-Login,JP-Login
+Shell,Login,RememberMe,Remember me,mZapamti me,FR-Remember me,JP-Remember me
+Shell,Login,Forgot,Forgot,mZaboravljena,FR-Forgot,JP-Forgot
+Shell,Login,Email,Email,mE-mail,FR-Email,JP-Email
+Shell,Login,Username,Username,mKorisnickoIme,FR-Username,JP-Username
+Shell,Login,Password,Password,mLozinka,FR-Password,JP-Password
+Shell,Login,Upload,Upload,mPostavi,FR-Upload,JP-Upload
+Shell,Login,Back,Back,mNazad,FR-Back,JP-Back
+Shell,Login,Update,Update,mAzuriraj,FR-Update,JP-Update
+Shell,UserWidget,ProfileSettings,Profile settings,mPostavke profila,FR-Profile settings,JP-Profile settings
+Shell,UserWidget,Logout,Logout,mOdjaviti se,FR-Logout,JP-Logout

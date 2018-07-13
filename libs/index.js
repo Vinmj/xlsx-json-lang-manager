@@ -1,23 +1,28 @@
 var fs = require('fs');
 var xlsx = require('xlsx');
 var cvcsv = require('csv');
-var mergeJSON = require("merge-json") ;
+var mergeJSON = require("merge-json");
+var colors = require("colors");
 
 exports = module.exports = XLSX_json;
 
 function XLSX_json (config, callback) {
-  if(!config.input) {
-    console.error("You miss a input file");
+  if(!config.sourceInfo || config.sourceInfo.length === 0) {
+    console.error("Failed To Create Resource JSON files, Details:\nPlease provide details of input files".red.bold);
     process.exit(1);
   }
   var cv = new CV(config, callback);
 }
 
 function CV(config, callback) {
-  var wb = this.load_xlsx(config.input)
-  var ws = this.ws(config, wb);
-  var csv = this.csv(ws)
-  this.cvjson(csv, config.outputdir, callback)
+  var csv=[];
+  for (let index = 0; index < config.sourceInfo.length; index++) {
+    var wb = this.load_xlsx(config.sourceInfo[index].input)
+    var ws = this.ws(config.sourceInfo, wb);
+    csv.push(this.csv(ws));
+  }
+  
+  this.cvjson(csv, config.outputdir, callback, config, config.allowDuplicateValues? true: false)
 }
 
 CV.prototype.load_xlsx = function(input) {
@@ -36,60 +41,125 @@ CV.prototype.csv = function(ws) {
   return csv_file = xlsx.utils.make_csv(ws)
 }
 
-CV.prototype.cvjson = function (csv, outputdir, callback) {
+CV.prototype.cvjson = function (csv, outputdir, callback, config , allowDuplicateValues) {
     var langs = [];
-    var objectLevel = 0;
     var nameArray = [];
+    var nameHash = {};
+    var valueHash = {};
     var valueArray = [];
-    cvcsv().from.string(csv)
-      .on('record', function (row, index) {
-          if (index === 0) {
-              row.forEach(function (element) {
-                  if (element.indexOf('Object') === 0) {
-                      objectLevel++;
+    var throughError = false;
+    var criticalError = false;
+    
+    var numberOfLanguages = config.numberOfLanguages;
+    var errorMsg = "Failed To Create Resource JSON files, Details: ";
+    try {
+      for (let v = 0; v < csv.length; v++) {
+        
+
+        cvcsv().from.string(csv[v])
+          
+          .on('record', function (row, index) {
+            var objectLevel = config.sourceInfo[v].objectLevel;
+            if (index === 0) {
+              if (v === 0) {
+                row.splice(0, objectLevel);
+                row.forEach(function (element, ln) {
+                  if (element.trim().length > 0) {
+                    langs.push(element);
                   }
                   else {
-                    if(element.length > 0){
-                      langs.push(element);
-                    }
+                    errorMsg += "\nLanguage name not specified at column " + (objectLevel + ln + 1) + ", file:"+config.sourceInfo[v].input+".";
+                    criticalError = true;
+                    throughError = true;
                   }
-              }, this);
-          }
-          else {
-              nameArray.push(row.splice(0, objectLevel));
+                }, this);
+              }
+            }
+            else if (!criticalError && row.join("").trim().length > 0) {
+              var arryName = row.splice(0, objectLevel);
+              var temploopError = false;
+              arryName.forEach(function (ee) {
+                if (temploopError) return;
+                if ((ee + "").trim().length === 0) {
+                  throughError = true;
+                  temploopError = true;
+                  errorMsg += "\nAll the object fields should have value at line " + (index + 1) + ", file:"+config.sourceInfo[v].input+".";
+                  return;
+                }
+              })
+              if (nameHash[arryName]) {
+                throughError = true;
+                errorMsg += "\nObject name hierarchy repeated at line " + (index + 1) + ", file:"+config.sourceInfo[v].input+".";
+              }
+              else {
+                nameHash[arryName] = index + 1;
+              }
+              nameArray.push(arryName);
+              row.forEach(function (ee, langin) {
+                if ((ee + "").trim().length === 0) {
+                  throughError = true;
+                  errorMsg += "\n" + langs[langin] + " should have a value at line " + (index + 1) + ", file:"+config.sourceInfo[v].input+".";
+                }
+              })
+              if (!allowDuplicateValues) {
+                if (valueHash[row[0]]) {
+                  throughError = true;
+                  errorMsg += "\nValue is repeated at line " + (index + 1) + ", Refer line " + valueHash[row[0]] + ", file:"+config.sourceInfo[v].input+".";
+                }
+                else {
+                  valueHash[row[0]] = index + 1;
+                }
+              }
               valueArray.push(row);
-          }
-      })
-      .on('end', function (count) {
-          for (var m = 0; m < langs.length; m++) {
-              var result = {};
-              nameArray.forEach(function (element, index) {
+            }
+          })
+          .on('end', function (count) {
+           
+            if (v === csv.length-1) {
+              if (throughError) {
+                console.log(errorMsg.red.bold);
+                return;
+              }
+              for (var m = 0; m < langs.length; m++) {
+                var result = {};
+                nameArray.forEach(function (element, index) {
                   var temp = undefined;
-                  for(var j=1; j<=element.length; j++){
+                  
+                  for (var j = 1; j <= element.length; j++) {
                     var sobj = {};
                     var itemNum = element.length - j;
-                    sobj[element[itemNum]] = temp? temp:valueArray[index][m];
-                    if(itemNum == 0){
+                    sobj[element[itemNum]] = temp ? temp : valueArray[index][m];
+                    if (itemNum == 0) {
                       result = mergeJSON.merge(result, sobj);
                     }
-                    else{
+                    else {
                       temp = sobj;
                     }
                   }
-              });
-              var output = outputdir + "/" + langs[m] + ".json";
-              if (output !== null) {
+                });
+                
+                var output = outputdir + "/" + langs[m] + ".json";
+                if (output !== null) {
                   var stream = fs.createWriteStream(output, { flags: 'w' });
                   stream.write(JSON.stringify(result, null, '\t'));
                   if (m === langs.length - 1) {
-                      callback(null, result);
+                    console.log("Resorce JSON files created successfully.".green.bold)
+                    callback(null, result);
+
                   }
-              } else {
+                } else {
                   callback(null, result);
+                }
               }
-          }
-      })
-      .on('error', function (error) {
-          console.error(error.message);
-      });
+            }
+          })
+          .on('error', function (error) {
+            console.error(error.message);
+          });
+      }
+
+    }
+    catch(ex){
+      console.log(ex);
+    }
 }

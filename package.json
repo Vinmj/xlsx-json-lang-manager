@@ -1,17 +1,48 @@
 {
-  "name": "xlsx-json-lang-manager",
-  "version": "1.0.4",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "_args": [
+    [
+      "xlsx-json-lang-manager@2.0.2"
+    ]
+  ],
+  "_development": true,
+  "_from": "xlsx-json-lang-manager@2.0.2",
+  "_id": "xlsx-json-lang-manager@2.0.2",
+  "_inBundle": false,
+  "_integrity": "sha512-sUTf6SzYpIItJFs2jxutrAhJwaKdnwfaA7u0if1OUTTrZp52oRnIjEydGDPjI/NEb+lwWYhiQWYlTMkLcMigYw==",
+  "_location": "/xlsx-json-lang-manager",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "xlsx-json-lang-manager@2.0.1",
+    "name": "xlsx-json-lang-manager",
+    "escapedName": "xlsx-json-lang-manager",
+    "rawSpec": "2.0.2",
+    "saveSpec": null,
+    "fetchSpec": "2.0.2"
   },
-  "author": "Vinayaka",
-  "license": "ISC",
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/xlsx-json-lang-manager/-/xlsx-json-lang-manager-2.0.1.tgz",
+  "_spec": "2.0.1",
+  "_where": "D:\\ARIM4\\arim-client",
+  "author": {
+    "name": "Vinayaka"
+  },
   "dependencies": {
+    "colors": "^1.1.2",
     "csv": "~0.3.6",
     "fs": "0.0.1-security",
     "merge-json": "0.1.0-b.3",
     "xlsx": "^0.11.1"
-  }
+  },
+  "description": "Easy way to manage language files in one place using xslx/csv.",
+  "license": "ISC",
+  "main": "index.js",
+  "name": "xlsx-json-lang-manager",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.0.1"
 }

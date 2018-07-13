@@ -1,0 +1,32 @@
+{
+	"Shell": {
+		"Login": {
+			"Login": "Login",
+			"RememberMe": "Remember me",
+			"Forgot": "Forgot",
+			"Email": "Email",
+			"Username": "Username",
+			"Password": "Password",
+			"Upload": "Upload",
+			"Back": "Back",
+			"Update": "Update"
+		},
+		"UserWidget": {
+			"ProfileSettings": "Profile settings",
+			"Logout": "Logout"
+		}
+	},
+	"main": {
+		"ErrorCode1": "Error-Description-1",
+		"ErrorCode2": "Error-Description-2",
+		"ErrorCode3": "Error-Description-3",
+		"ErrorCode4": "Error-Description-4",
+		"ErrorCode5": "Error-Description-5",
+		"ErrorCode6": "Error-Description-6",
+		"ErrorCode7": "Error-Description-7",
+		"ErrorCode8": "Error-Description-8",
+		"ErrorCode9": "Error-Description-9",
+		"ErrorCode10": "Error-Description-10",
+		"ErrorCode11": "Error-Description-11"
+	}
+}

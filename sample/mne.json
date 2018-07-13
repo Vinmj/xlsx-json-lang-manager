@@ -1,0 +1,32 @@
+{
+	"Shell": {
+		"Login": {
+			"Login": "mPrijaviti se",
+			"RememberMe": "mZapamti me",
+			"Forgot": "mZaboravljena",
+			"Email": "mE-mail",
+			"Username": "mKorisnickoIme",
+			"Password": "mLozinka",
+			"Upload": "mPostavi",
+			"Back": "mNazad",
+			"Update": "mAzuriraj"
+		},
+		"UserWidget": {
+			"ProfileSettings": "mPostavke profila",
+			"Logout": "mOdjaviti se"
+		}
+	},
+	"main": {
+		"ErrorCode1": "mError-Description-1",
+		"ErrorCode2": "mError-Description-2",
+		"ErrorCode3": "mError-Description-3",
+		"ErrorCode4": "mError-Description-4",
+		"ErrorCode5": "mError-Description-5",
+		"ErrorCode6": "mError-Description-6",
+		"ErrorCode7": "mError-Description-7",
+		"ErrorCode8": "mError-Description-8",
+		"ErrorCode9": "mError-Description-9",
+		"ErrorCode10": "mError-Description-10",
+		"ErrorCode11": "mError-Description-11"
+	}
+}
